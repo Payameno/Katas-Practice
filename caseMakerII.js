@@ -97,9 +97,73 @@ const makeCase = function(input, caseStyle) {
     }
   }
 
+  if (caseStyle === "vowel") {
+
+    for (let i=0; i < inputArray.length; i++) {
+      
+      let vowelToUpperCase = inputArray[i].replace(/[aeiou]/g, match => {
+        const convert = match.toUpperCase();
+        return convert;
+      })
+
+      if ( i >= 0 && i !== inputArray.length - 1 ) {
+        const head = vowelToUpperCase + " ";
+        resultArray.push(head);
+      }
+
+      if (i === inputArray.length - 1 ) {
+        resultArray.push(vowelToUpperCase);
+      }
+
+    }
+  }
+
+  if (caseStyle === "consonant") {
+
+
+    const upperCaseInputArray = inputArray.map(item => {
+      const converted = item.toUpperCase();
+      return converted;
+    });
+
+    for (let i=0; i < upperCaseInputArray.length; i++) {
+  
+      let vowelToUpperCase = upperCaseInputArray[i].replace(/[AEIOU]/g, match => {
+        const convert = match.toLowerCase();
+        return convert;
+      })
+
+      if ( i >= 0 && i !== inputArray.length - 1 ) {
+        const head = vowelToUpperCase + " ";
+        resultArray.push(head);
+      }
+
+      if (i === inputArray.length - 1 ) {
+        resultArray.push(vowelToUpperCase);
+      }
+
+    }
+  }
+
+
+  if (caseStyle.includes("upper") && caseStyle.includes("snake")) {
+
+    for (let i=0; i < inputArray.length; i++) {
+      
+      if ( i >= 0 && i !== inputArray.length - 1 ) { 
+        const convertedArray = inputArray[i].toUpperCase() + "_";
+        resultArray.push(convertedArray);
+      }
+
+      if ( i === inputArray.length - 1 ) {
+        const underscoreAdded = inputArray[i].toUpperCase();
+        resultArray.push(underscoreAdded);
+      }
+    }
+  }
+  
   const resultString = resultArray.join("");
   return resultString;
-
 }
 
 console.log(makeCase("this is a string", "camel"));
